@@ -14,21 +14,21 @@ gravedigger -d file.gpg file.key  # => Decrypts file.gpg using file.key"
 
 if [[ $1 == "" ]];
   then
-        echo "$__usage" | lolcat;
+        echo "$__usage";
 elif [[ $1 == "-e" ]];
   then
         if [ -r $2 ];
         then
-                echo "Found $2... running cautionary checks on whether file was already encrypted..." | lolcat;
+                echo "Found $2... running cautionary checks on whether file was already encrypted...";
                 if [[ ! -f "$2.gpg" && ! -f "$2.key" ]];
                 then
                         if [ $3 -ge 8 ];
                         then
-                                echo "We're good! Starting encryption process now..." | lolcat
+                                echo "We're good! Starting encryption process now..."
                                 gpg --gen-random --armor 1 $3 > $2.key
-                                echo "Generated $2.key..." | lolcat
+                                echo "Generated $2.key..."
                                 gpg --batch -c --passphrase-file $2.key --output $2.gpg $2
-                                echo "Done! Encrypted $2 into $2.key and $2.gpg" | lolcat;
+                                echo "Done! Encrypted $2 into $2.key and $2.gpg";
                         else
                                 echo "Refusing to generate a password less than 8 bits long :(";
                         fi;
@@ -44,8 +44,8 @@ elif [[ $1 == "-d" ]];
                 then
                         if [ ! -f ${2%.gpg} ]
                         then
-                                echo "Decrypting $2 using $3 to ${2%.gpg}..." | lolcat
-                                gpg --batch -d --passphrase-file $3 --output ${2%.gpg} $2 | lolcat;
+                                echo "Decrypting $2 using $3 to ${2%.gpg}..."
+                                gpg --batch -d --passphrase-file $3 --output ${2%.gpg} $2;
                                 echo "Hooray! ${2%.gpg} has been decrypted!"
                         else
                                 echo "${2%.gpg} already exists! Refusing to continue.";
