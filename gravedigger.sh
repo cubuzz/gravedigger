@@ -1,7 +1,5 @@
 #!/bin/bash
 
-banner -f 2 Gravedigger | lolcat
-
 __usage="Gravedigger - A simple script to quickly symetrically encrypt files.
 ====================================================================
 
